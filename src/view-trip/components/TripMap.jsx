@@ -101,7 +101,7 @@ const TripMap = ({ tripDetails }) => {
                             title="You are here"
                             icon={{
                                 url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Custom blue marker
-                                scaledSize: new window.google.maps.Size(30, 30), // Size of the marker
+                                scaledSize: mapLoaded ? new window.google.maps.Size(30, 30) : undefined, // Only set size if map is loaded
                             }}
                         />
                     )}
