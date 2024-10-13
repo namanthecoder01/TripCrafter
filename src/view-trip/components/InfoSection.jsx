@@ -36,7 +36,7 @@ function InfoSection({ trip }) {
             try {
                 await navigator.share({
                     title: locationLabel || 'My Trip',
-                    text: `Check out this trip to ${locationLabel}. ${trip?.userSelection?.noOfDays} Days | Budget: ${trip?.userSelection?.budget} | Travelers: ${trip?.userSelection?.traveler}`,
+                    text: `Check out this trip to ${locationLabel}. ${trip?.userSelection?.noOfDays} Days | Budget: ${trip?.userSelection?.budget} | Travelers: ${trip?.userSelection?.travelers}`,
                     url: window.location.href, // Link to the current page
                 });
                 toast.success('Trip shared successfully!');
@@ -50,14 +50,16 @@ function InfoSection({ trip }) {
     };
 
     return (
-        <div>
-            <img src={photoUrl} className='h-[340px] w-full object-cover rounded-xl' alt={locationLabel || "Location"} />
-            <div className='flex justify-between items-center'>
-                <div className='my-5 flex flex-col gap-2'>
-                    <h2 className='font-bold text-lg'>
+        <div className='p-4 md:p-8'>
+            <img src={photoUrl} className='h-[240px] md:h-[340px] w-full object-cover rounded-xl' alt={locationLabel || "Location"} />
+            
+            <div className='flex flex-col md:flex-row justify-between items-start md:items-center mt-5'>
+                {/* Trip Information */}
+                <div className='my-5 flex flex-col gap-2 w-full'>
+                    <h2 className='font-bold text-lg md:text-2xl'>
                         {locationLabel}
                     </h2>
-                    <div className='flex gap-5'>
+                    <div className='flex flex-wrap gap-2 md:gap-5'>
                         <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-md'>
                             🗓️ {trip?.userSelection?.noOfDays} Days
                         </h2>
@@ -69,8 +71,11 @@ function InfoSection({ trip }) {
                         </h2>
                     </div>
                 </div>
-                <Button onClick={handleShare}>
+
+                {/* Share Button */}
+                <Button className='w-full md:w-auto' onClick={handleShare}>
                     <IoIosSend />
+                    <span className='ml-2 hidden md:inline'>Share Trip</span>
                 </Button>
             </div>
         </div>

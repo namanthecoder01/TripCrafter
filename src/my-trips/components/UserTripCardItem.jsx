@@ -36,7 +36,7 @@ function UserTripCardItem({ trip }) {
     return (
         <Link to={'/view-trip/' + trip?.id}>
             <div className='hover:scale-105 transition-all'>
-                <div className='relative h-[220px] rounded-xl overflow-hidden'>
+                <div className='relative h-[220px] sm:h-[180px] rounded-xl overflow-hidden'>
                     {loading ? (
                         <div className='absolute inset-0 bg-gray-200 animate-pulse'></div>
                     ) : error ? (
@@ -52,8 +52,8 @@ function UserTripCardItem({ trip }) {
                     )}
                 </div>
                 <div className='mt-3'>
-                    <h2 className='font-bold text-lg'>{trip?.userSelection?.location?.label}</h2>
-                    <p className='text-sm text-gray-500'>
+                    <h2 className='font-bold text-lg sm:text-base'>{trip?.userSelection?.location?.label}</h2>
+                    <p className='text-sm sm:text-xs text-gray-500'>
                         {trip?.userSelection.noOfDays} Days trip with {trip?.userSelection.budget} Budget
                     </p>
                 </div>

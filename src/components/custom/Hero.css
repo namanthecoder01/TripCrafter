@@ -1,82 +1,89 @@
 .hero-container {
-    position: relative;
-    height: 100vh; /* Full viewport height */
-    overflow: hidden; /* Prevent overflow from the video */
+  position: relative;
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  overflow: hidden; /* Prevent any overflow */
+}
+
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  object-fit: cover; /* Cover the entire container without distortion */
+  object-position: center; /* Keep the center of the video focused */
+  z-index: 0; /* Behind the content */
+}
+
+.hero-content {
+  z-index: 1;
+  text-align: center;
+  max-width: 800px;
+  padding: 40px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px); /* Adds a frosted glass effect */
+  transition: transform 0.5s ease;
+  position: relative; /* Keep the content above the video */
+}
+
+.ladakh-theme {
+  background-color: rgba(0, 0, 0, 0.7); /* Dark overlay for readability */
+  color: white;
+}
+
+.hero-title {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-button {
+  background-color: #4a90e2;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-button:hover {
+  background-color: #357ABD;
+  transform: scale(1.05);
+}
+
+/* Fade-in animation */
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
   }
-  
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-container {
+      height: 100vh; /* Always full height */
+      width: 100vw; /* Always full width */
+  }
+
   .hero-video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: 0; /* Put the video behind content */
-    transform: translate(-50%, -50%); /* Center the video */
-    object-fit: cover; /* Cover the whole container */
+      width: 100vw; /* Full viewport width */
+      height: 100vh; /* Full viewport height */
+      object-fit: cover; /* Keep the video covering the screen */
   }
-  
-  .hero-content {
-    z-index: 1;
-    text-align: center;
-    max-width: 800px;
-    padding: 40px;
-    border-radius: 15px; /* Rounded corners */
-    backdrop-filter: blur(10px); /* Adds a frosted glass effect */
-    transition: transform 0.5s ease; /* Animation for content appearance */
+
+  h1 {
+      font-size: 32px; /* Adjust heading size */
   }
-  
-  .ladakh-theme {
-    background-color: rgba(0, 0, 0, 0.7); /* Dark overlay for Ladakh theme */
-    color: white; /* Text color for contrast */
+
+  p {
+      font-size: 18px; /* Adjust paragraph size */
   }
-  
-  .hero-title {
-    position: relative;
-    display: inline-block; /* Makes it inline-block for shadow effect */
-  }
-  
-  .hero-button {
-    background-color: #4a90e2; /* Color that reflects Ladakh theme */
-    color: white; /* Button text color */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transition effects */
-    padding: 10px 20px; /* Padding for the button */
-    border-radius: 5px; /* Rounded button corners */
-  }
-  
-  .hero-button:hover {
-    background-color: #357ABD; /* Darker shade on hover */
-    transform: scale(1.05); /* Slightly enlarge on hover */
-  }
-  
-  /* Fade-in animation */
-  .fade-in {
-    animation: fadeIn 1s ease-in-out; /* Adjust duration and timing function as needed */
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0; /* Start transparent */
-      transform: translateY(-20px); /* Start slightly above */
-    }
-    to {
-      opacity: 1; /* End fully opaque */
-      transform: translateY(0); /* End at original position */
-    }
-  }
-  
-  /* Responsive design */
-  @media (max-width: 768px) {
-    .hero-container {
-      height: auto; /* Adjust height for smaller screens */
-      padding: 20px; /* Adjust padding */
-    }
-  
-    h1 {
-      font-size: 32px; /* Adjust font size for smaller screens */
-    }
-  
-    p {
-      font-size: 18px; /* Adjust font size for smaller screens */
-    }
-  }
-  
+}

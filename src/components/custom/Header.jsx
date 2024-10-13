@@ -59,31 +59,46 @@ function Header() {
   };
 
   return (
-    <div className=" shadow-sm flex justify-between items-center pr-5">
+    <div className="shadow-sm flex justify-between items-center pr-5">
       <img src="/logo.svg" alt="Logo" className="h-20" />
       <div className="flex items-center">
         {user ? (
           <div className='flex items-center gap-3'>
-            <a href='/create-trip'>
+            {/* Hide these buttons on small screens */}
+            <a href='/create-trip' className='hidden md:inline'>
               <Button variant='outline' className='rounded-full'>
                 + Create Trip
               </Button>
             </a>
-            <a href='/my-trips'>
+            <a href='/my-trips' className='hidden md:inline'>
               <Button variant='outline' className='rounded-full'>
                 My Trips
               </Button>
             </a>
+            
             <Popover>
               <PopoverTrigger>
                 <img 
                   src={user?.picture} 
                   alt="User Profile" 
-                  className='h-[35px] w-[35px] rounded-full'
+                  className='h-[35px] w-[35px] rounded-full md:h-[40px] md:w-[40px] lg:h-[45px] lg:w-[45px]'
                 />
               </PopoverTrigger>
               <PopoverContent className='bg-white'>
-                <h2 className='cursor-pointer' onClick={handleLogout}>Logout</h2>
+                {/* Add My Trips and Create Trip inside the login menu for small screens */}
+                <div className='flex flex-col gap-2'>
+                  <a href='/create-trip' className='md:hidden'>
+                    <Button variant='outline' className='w-full'>
+                      + Create Trip
+                    </Button>
+                  </a>
+                  <a href='/my-trips' className='md:hidden'>
+                    <Button variant='outline' className='w-full'>
+                      My Trips
+                    </Button>
+                  </a>
+                  <h2 className='cursor-pointer' onClick={handleLogout}>Logout</h2>
+                </div>
               </PopoverContent>
             </Popover>
           </div>

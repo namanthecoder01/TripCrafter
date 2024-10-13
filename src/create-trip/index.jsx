@@ -23,7 +23,7 @@ function CreateTrip() {
         noOfDays: '',
         location: null,
         budget: '',
-        travelers: '', // Changed from traveler to travelers for clarity
+        travelers: '',
     });
     const [openDialog, setOpenDialog] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -49,7 +49,7 @@ function CreateTrip() {
         const FINAL_PROMPT = AI_PROMPT
             .replace('{location}', formData.location.label)
             .replace('{totalDays}', formData.noOfDays)
-            .replace('{travelers}', formData.travelers) // Update the prompt to include travelers
+            .replace('{travelers}', formData.travelers)
             .replace('{budget}', formData.budget);
 
         const result = await chatSession.sendMessage(FINAL_PROMPT);
@@ -85,16 +85,16 @@ function CreateTrip() {
     };
 
     return (
-        <div className='sm:px-10 md:px-32 lg:px-56 xl:px-10 px-5 mt-10'>
-            <h2 className='font-bold text-3xl'>
+        <div className='px-4 sm:px-5 md:px-10 lg:px-20 xl:px-24 mt-10'>
+            <h2 className='font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl'>
                 Tell us your Travel Preferences 🏕️🌴
             </h2>
-            <p className='mt-3 text-gray-500 text-xl'>
+            <p className='mt-3 text-gray-500 text-base sm:text-lg md:text-xl lg:text-2xl sm:text-gray-400'>
                 Just provide some basic information, and our trip planner will generate a customized itinerary based on your preferences.
             </p>
-            <div className='mt-20 flex flex-col gap-10'>
+            <div className='mt-5 sm:mt-20 flex flex-col gap-10'>
                 <div>
-                    <h2 className='text-xl my-3 font-medium'>
+                    <h2 className='text-lg sm:text-xl my-3 font-medium'>
                         What is your destination of choice?
                     </h2>
                     <GooglePlacesAutocomplete
@@ -111,21 +111,21 @@ function CreateTrip() {
                     />
                 </div>
                 <div>
-                    <h2 className='text-xl my-3 font-medium'>
+                    <h2 className='text-lg sm:text-xl my-3 font-medium'>
                         How many days are you planning your trip?
                     </h2>
                     <input
                         placeholder={'Ex. 3'}
                         type='number'
-                        onChange={(e) => setFormData({ ...formData, noOfDays: e.target.value })} // Use noOfDays instead of duration
-                        className="border p-2 rounded bg-white text-black"
+                        onChange={(e) => setFormData({ ...formData, noOfDays: e.target.value })}
+                        className="w-full border p-2 rounded bg-white text-black"
                     />
                 </div>
                 <div>
-                    <h2 className='text-xl my-3 font-medium'>
+                    <h2 className='text-lg sm:text-xl my-3 font-medium'>
                         What is your Budget?
                     </h2>
-                    <div className='grid grid-cols-3 gap-5 mt-5'>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-5'>
                         {SelectBudgetOptions.map((item, index) => (
                             <div
                                 key={index}
@@ -140,14 +140,14 @@ function CreateTrip() {
                     </div>
                 </div>
                 <div>
-                    <h2 className='text-xl my-3 font-medium'>
+                    <h2 className='text-lg sm:text-xl my-3 font-medium'>
                         Who do you plan on traveling with on your next adventure?
                     </h2>
-                    <div className='grid grid-cols-3 gap-5 mt-5'>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-5'>
                         {SelectTravelsList.map((item, index) => (
                             <div
                                 key={index}
-                                onClick={() => setFormData({ ...formData, travelers: item.people })} // Update to travelers
+                                onClick={() => setFormData({ ...formData, travelers: item.people })}
                                 className={`p-4 border cursor-pointer rounded-lg hover:shadow-lg ${formData.travelers === item.people ? 'shadow-lg border-black' : ''}`}
                             >
                                 <h2 className='text-4xl'>{item.icon}</h2>
@@ -159,9 +159,13 @@ function CreateTrip() {
                 </div>
             </div>
             <div className='mt-10 justify-end flex'>
-                <Button onClick={OnGenerateTrip} disabled={loading}>
-                    {loading ? <AiOutlineLoading3Quarters className='h-7 w-7 animate-spin' /> : "Generate Trip"}
-                </Button>
+            <Button 
+                onClick={OnGenerateTrip} 
+                disabled={loading} 
+                className={`w-full sm:w-auto flex items-center justify-center p-2 rounded-lg transition-colors duration-300 ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-black text-white hover:bg-blue-700'}`}
+            >
+                {loading ? <AiOutlineLoading3Quarters className='h-7 w-7 animate-spin' /> : "Generate Trip"}
+            </Button>
             </div>
             <Dialog open={openDialog}>
                 <DialogContent>

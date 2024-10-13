@@ -32,20 +32,20 @@ function PlaceCardItem({ place }) {
 
     return (
         <Link to={'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(place?.name)} target='_blank' rel="noopener noreferrer">
-            <div className='border rounded-xl p-3 mt-2 flex gap-5 hover:scale-105 transition-all hover:shadow-md cursor-pointer'>
+            <div className='border rounded-xl p-3 mt-2 flex flex-col md:flex-row gap-5 hover:scale-105 transition-all hover:shadow-md cursor-pointer'>
                 <img 
                     src={photoUrl} 
-                    className='w-[130px] h-[130px] rounded-xl object-cover' 
+                    className='w-full md:w-[130px] h-[180px] md:h-[130px] rounded-xl object-cover' 
                     alt={place?.name || "Place"} 
                 />
-                <div className='mt-5'>
+                <div className='flex-1 mt-3 md:mt-5'>
                     <h2 className='font-bold text-lg'>
                         {place?.name}
                     </h2>
-                    <p className='text-sm text-gray-400'>
+                    <p className='text-sm text-gray-400 mt-2'>
                         {place?.details || "No details available"} {/* Fallback for details */}
                     </p>
-                    <h2 className='mt-2'>
+                    <h2 className='mt-3'>
                         🕒 {place?.travel_time || "Travel time not specified"} {/* Fallback for travel time */}
                     </h2>
                 </div>
