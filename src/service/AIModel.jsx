@@ -1,0 +1,35 @@
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+  
+  const apiKey = import.meta.env.VITE_GOOGLE_GEMINI_AI_API_KEY;
+  const genAI = new GoogleGenerativeAI(apiKey);
+  
+  const model = genAI.getGenerativeModel({
+    model: "gemini-1.5-flash",
+  });
+  
+  const generationConfig = {
+    temperature: 1,
+    topP: 0.95,
+    topK: 64,
+    maxOutputTokens: 8192,
+    responseMimeType: "application/json",
+  };
+  
+    export const chatSession = model.startChat({
+      generationConfig,
+      history: [
+        {
+          role: "user",
+          parts: [
+            {text: "Generate travel plan for location: Delhi, with  geo-coordinates of Delhi for 3 days for couple with a cheap budget, Give me a Hotels  list with HotelName, Hotel address, Price, hotel image url, geo coordinates, rating, descriptions and suggest iternary with placeName, Place Details, Place Image url, Geo Coordinates, ticket pricing, rating, Time travel of each of the location for 3 days with each day plan with best time to visit in .JSON format"},
+          ],
+        },
+        {
+          role: "model",
+          parts: [
+            {text: "```json\n{\n  \"location\": \"Delhi\",\n  \"geo_coordinates\": [28.6139, 77.2090],\n  \"budget\": \"cheap\",\n  \"travelers\": \"couple\",\n  \"duration\": 3,\n  \"hotels\": [\n    {\n      \"name\": \"The Metropolitan Hotel & Spa\",\n      \"address\": \"19, Ashoka Road, Connaught Place, New Delhi, Delhi 110001\",\n      \"price\": \"$50-$80\",\n      \"image_url\": \"https://www.themetropolitanhotel.com/images/gallery/hotel-exterior-01.jpg\",\n      \"geo_coordinates\": [28.6327, 77.2185],\n      \"rating\": 4.5,\n      \"description\": \"A centrally located hotel with modern amenities and a spa.\"\n    },\n    {\n      \"name\": \"The Lodhi\",\n      \"address\": \"Lodhi Road, New Delhi, Delhi 110003\",\n      \"price\": \"$70-$100\",\n      \"image_url\": \"https://www.thelodhi.com/images/lodhi-hotel-new-delhi/lodhi-hotel-new-delhi-exterior-1.jpg\",\n      \"geo_coordinates\": [28.5966, 77.2218],\n      \"rating\": 4.7,\n      \"description\": \"A luxurious hotel with a beautiful garden and a rooftop pool.\"\n    },\n    {\n      \"name\": \"The Leela Palace New Delhi\",\n      \"address\": \"Chanakyapuri, New Delhi, Delhi 110021\",\n      \"price\": \"$100-$150\",\n      \"image_url\": \"https://www.theleela.com/images/leela-palace-new-delhi/leela-palace-new-delhi-exterior-1.jpg\",\n      \"geo_coordinates\": [28.5675, 77.1968],\n      \"rating\": 4.8,\n      \"description\": \"A grand hotel with a palace-like setting and excellent service.\"\n    }\n  ],\n  \"itinerary\": [\n    {\n      \"day\": 1,\n      \"plan\": [\n        {\n          \"placeName\": \"Red Fort\",\n          \"placeDetails\": \"A UNESCO World Heritage Site and a must-visit for its historical significance.\",\n          \"placeImageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Red_Fort_Delhi.jpg/1200px-Red_Fort_Delhi.jpg\",\n          \"geoCoordinates\": [28.6560, 77.2395],\n          \"ticketPricing\": \"INR 10 for Indians, INR 200 for foreigners\",\n          \"rating\": 4.8,\n          \"timeTravel\": \"1 hour\",\n          \"bestTime\": \"Sunrise to Sunset\"\n        },\n        {\n          \"placeName\": \"Chandni Chowk\",\n          \"placeDetails\": \"A bustling marketplace with street food, shops, and historical buildings.\",\n          \"placeImageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Chandni_Chowk.jpg/1280px-Chandni_Chowk.jpg\",\n          \"geoCoordinates\": [28.6497, 77.2306],\n          \"ticketPricing\": \"N/A\",\n          \"rating\": 4.5,\n          \"timeTravel\": \"30 minutes\",\n          \"bestTime\": \"Morning or evening to avoid crowds\"\n        }\n      ]\n    },\n    {\n      \"day\": 2,\n      \"plan\": [\n        {\n          \"placeName\": \"Qutub Minar\",\n          \"placeDetails\": \"The tallest brick minaret in the world and another UNESCO World Heritage Site.\",\n          \"placeImageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Qutub_Minar_Delhi.jpg/1280px-Qutub_Minar_Delhi.jpg\",\n          \"geoCoordinates\": [28.5245, 77.1734],\n          \"ticketPricing\": \"INR 30 for Indians, INR 500 for foreigners\",\n          \"rating\": 4.7,\n          \"timeTravel\": \"1 hour\",\n          \"bestTime\": \"Morning or evening to avoid heat\"\n        },\n        {\n          \"placeName\": \"Humayun's Tomb\",\n          \"placeDetails\": \"A beautiful Mughal-era tomb with intricate architecture.\",\n          \"placeImageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Humayuns_Tomb_in_Delhi_India.jpg/1280px-Humayuns_Tomb_in_Delhi_India.jpg\",\n          \"geoCoordinates\": [28.5920, 77.2165],\n          \"ticketPricing\": \"INR 30 for Indians, INR 500 for foreigners\",\n          \"rating\": 4.6,\n          \"timeTravel\": \"30 minutes\",\n          \"bestTime\": \"Morning or evening for better lighting\"\n        }\n      ]\n    },\n    {\n      \"day\": 3,\n      \"plan\": [\n        {\n          \"placeName\": \"Lotus Temple\",\n          \"placeDetails\": \"A unique and modern temple designed in the shape of a lotus flower.\",\n          \"placeImageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Lotus_Temple_Delhi.jpg/1280px-Lotus_Temple_Delhi.jpg\",\n          \"geoCoordinates\": [28.5534, 77.2305],\n          \"ticketPricing\": \"Free\",\n          \"rating\": 4.9,\n          \"timeTravel\": \"45 minutes\",\n          \"bestTime\": \"Morning or evening to avoid crowds\"\n        },\n        {\n          \"placeName\": \"India Gate\",\n          \"placeDetails\": \"A war memorial dedicated to Indian soldiers who died in World War I.\",\n          \"placeImageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/India_Gate_Delhi.jpg/1280px-India_Gate_Delhi.jpg\",\n          \"geoCoordinates\": [28.6130, 77.2296],\n          \"ticketPricing\": \"Free\",\n          \"rating\": 4.6,\n          \"timeTravel\": \"15 minutes\",\n          \"bestTime\": \"Evening for a beautiful light show\"\n        }\n      ]\n    }\n  ]\n}\n```\n\n**Notes:**\n\n* **Budget:** This itinerary focuses on free or low-cost attractions, with budget-friendly options for accommodation and food. \n* **Transportation:**  Consider using the Delhi Metro for efficient and affordable travel around the city.\n* **Food:**  Delhi is a paradise for street food. Enjoy delicious and cheap meals from vendors in Chandni Chowk, Connaught Place, or near the Red Fort.\n* **Timing:** Adjust the timings of your visits based on your preferences and available time.\n* **Safety:** Be mindful of your surroundings, especially in crowded areas.\n* **Bargaining:**  Don't hesitate to bargain for prices in markets and street stalls.\n* **Culture:**  Be respectful of local customs and dress appropriately when visiting religious sites.\n\n**Have a great time exploring Delhi!** \n"},
+        ],
+        },
+      ],
+    });
